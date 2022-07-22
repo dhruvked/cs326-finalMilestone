@@ -8,19 +8,18 @@ import logger from 'morgan';
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 //connect to database
-database.connect();
-
+database.connect()
 // TODO #3: Add middleware to the Express app.
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use('/', express.static('client'));
-
 // TODO #4: Implement the /wordScore endpoint
 app.post('/saveLine',async(req,res)=>{
   try{
+    console.log(req)
     await database.saveLine(req.body['user'],req.body['slope'],req.body['score'])
     res.statusCode=200;
     res.ok=true;
@@ -54,5 +53,7 @@ app.all('*', async (request, response) => {
 
 // Start the server.
 app.listen(port, () => {
-  const msg = `  Server started on http://localhost:${port}`;
+  // This is totally just for fun!
+  const msg = ` Server started on http://localhost:${port}`;
+  console.log(msg)
 });

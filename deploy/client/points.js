@@ -6,6 +6,7 @@ class LineBoard{
     async saveLine(user,slope,intercept){
         try{
             let newLine={user,slope,intercept};
+            console.log(newLine)
             const responseJSON=await fetch('/saveLine',{
                 method:'POST',
                 headers:{
@@ -21,9 +22,22 @@ class LineBoard{
     }
 
     render(element) {
+        
+        const responseLineJson=await fetch('/top10lines',{
+            method:'GET',
+        })
+      
+        let responseLine=await responseLineJson.json();
         let html = '<h1>Last Lines</h1>';
         html += '<table>';
-        this.lines.forEach((line) => {
+        html += `
+            <tr>
+                <th>USER</th>
+                <th>Slope</th>
+                <th>Intercept</th>
+            </tr>
+        `;
+        responseLine.forEach((line) => {
           html += `
             <tr>
               <td>${line.user}</td>

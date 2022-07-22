@@ -1,5 +1,6 @@
 import {Grid} from './grid.js';
 import {Explain} from './explain.js';
+import {board} from './points.js'
 
 let canvas=document.getElementById("canvas1");
 let grid=new Grid(canvas);
@@ -49,6 +50,11 @@ function  prev(){
     explain.displayText()
 }
 
+function storeLine(){
+    let m=grid.line.m
+    let b=grid.line.b
+    board.saveLine(0,m,b);
+}
 document.getElementById("slopeRange").addEventListener('input',fetchSlope);
 document.getElementById("yRange").addEventListener('input',fetchY);
 
@@ -58,3 +64,8 @@ document.getElementById("testerY").addEventListener('input',revfetchY);
 
 document.getElementById("N").addEventListener('click',next);
 document.getElementById("P").addEventListener('click',prev);
+
+document.getElementById("slopeRange").addEventListener('mouseup',storeLine);
+document.getElementById("yRange").addEventListener('mouseup',storeLine)
+document.getElementById("testerS").addEventListener('keyup',storeLine);
+document.getElementById("testerY").addEventListener('keyup',storeLine);

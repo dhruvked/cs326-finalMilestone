@@ -11,7 +11,7 @@ class LineBoard{
                 headers:{
                     'Content-Type':'application/json'
                 },
-                body: JSON.stringify(neword),
+                body: JSON.stringify(newLine),
             })
             this.lines.push(newLine)
         }
@@ -37,4 +37,4 @@ class LineBoard{
     }
 }
 
-export const line=new LineBoard();
+export const board=new LineBoard();

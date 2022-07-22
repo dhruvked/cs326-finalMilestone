@@ -19,7 +19,7 @@ app.use('/', express.static('client'));
 // TODO #4: Implement the /wordScore endpoint
 app.post('/saveLine',async(req,res)=>{
   try{
-    await database.saveLine(req.body['user'],req.body['slope'],req.body['score'])
+    await database.saveLine(req.body['userID'],req.body['slope'],req.body['intercept'])
     res.statusCode=200;
     res.ok=true;
     res.send({status:'success'})

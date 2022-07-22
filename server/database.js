@@ -5,8 +5,8 @@ import pg from 'pg';
 const { Pool } = pg;
 /** A class representing a database to store scores */
 class Database {
-  constructor() {
-    this.path = process.env.DATABASE_URL;
+  constructor(path) {
+    this.path = path;
   }
 
   async connect(){
@@ -14,8 +14,6 @@ class Database {
       connectionString: this.path,
       ssl: { rejectUnauthorized: false }, // Required for Heroku connections
     });
-
-
     // Create the pool.
     this.client = await this.pool.connect();
 
@@ -26,9 +24,9 @@ class Database {
   async init() {
     const queryText = `
       create table if not exists points(
-        user int primaryKey,
-        X int,
-        Y int
+        userID int,
+        X float,
+        Y float
       )
     `;
     const res = await this.client.query(queryText);
@@ -51,7 +49,7 @@ class Database {
    */
   async saveLine(user, slope, intercept) {
     const queryText =
-      'INSERT INTO points (user, slope, intercept) VALUES ($1, $2, $3) RETURNING *';
+      'INSERT INTO points (userID, slope, intercept) VALUES ($1, $2, $3) RETURNING *';
     const res = await this.client.query(queryText, [user, slope, intercept]);
     return res.rows;
   }
@@ -72,6 +70,6 @@ class Database {
   }
 }
 
-const database = new Database();
+const database = new Database(process.env.DATABASE_URL);
 
 export { database };

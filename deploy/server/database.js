@@ -25,9 +25,9 @@ class Database {
     const queryText = `
       create table if not exists points(
         userID int,
-        X float,
-        Y float
-      )
+        slope float,
+        intercept float
+      );
     `;
     const res = await this.client.query(queryText);
   }
@@ -49,7 +49,7 @@ class Database {
    */
   async saveLine(user, slope, intercept) {
     const queryText =
-      'INSERT INTO points (user, slope, intercept) VALUES ($1, $2, $3) RETURNING *';
+      'INSERT INTO points (userID, slope, intercept) VALUES ($1, $2, $3) RETURNING *';
     const res = await this.client.query(queryText, [user, slope, intercept]);
     return res.rows;
   }
