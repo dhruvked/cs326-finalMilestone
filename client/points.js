@@ -36,3 +36,5 @@ class LineBoard{
         element.innerHTML = html;
     }
 }
+
+export const line=new LineBoard();
