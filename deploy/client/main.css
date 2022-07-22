@@ -1,0 +1,70 @@
+body{
+    background-color:beige;
+    display: grid;
+    justify-content: space-between;
+    grid-template: "UI UI UI POINTS";
+}
+
+#UI{
+    grid-area: UI;
+}
+
+#grid-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+canvas{
+    background-color: aqua;
+    background-color: white;
+    margin: 0%;
+}
+
+#slidecontainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input{
+    background-color: beige;
+    align-items: center;
+    justify-content:center;
+}
+
+#testerS,#testerY{
+    margin: 4px;
+    width: 30px;
+    text-align: center;
+}
+
+#explain-contain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table{
+    background-color: gray;
+    border: 1px solid;
+    border-collapse: collapse;
+    color: beige;
+    
+}
+th,td{
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 70px;
+    text-align: center;
+}
+
+#explain-contain canvas{
+    background-color: beige;
+}
+
+#link{
+    color: pink;
+}
