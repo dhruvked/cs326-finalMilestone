@@ -108,11 +108,11 @@
         </div>
         <div id="slidecontainer">
             <label>Slope</label>
-            <input type="range" min="-5" max="5" value="0" step="1" class="slider" id="slopeRange" oninput="fetchSlope(this)">
-            <input type="text" id="testerS" value="0" oninput="revfetchS(this)">
+            <input type="range" min="-5" max="5" value="0" step="1" class="slider" id="slopeRange">
+            <input type="text" id="testerS" value="0">
             <label>Y-intercept</label>
-            <input type="range" min="-10" max="10" value="0" step="1" class="slider" id="yRange" oninput="fetchY(this)">
-            <input type="text" id="testerY" value="0" oninput="revfetchY(this)">
+            <input type="range" min="-10" max="10" value="0" step="1" class="slider" id="yRange">
+            <input type="text" id="testerY" value="0" >
         </div>
         <div id="explain-contain">
             <canvas id="canvas2">
@@ -126,10 +126,10 @@
                     <p id="e6">To understand the concept better you can play around with the sliders, initially set to go through origin</p>
                     <p id="e7">Or click on two points on the graph and it should give you a line with slope and intercept.</p>
             </canvas>
-            <input type="button" value="NEXT" id="N" onclick="next()">
-            <input type="button" value="PREVIOUS" id="P" onclick="prev()">
+            <input type="button" value="NEXT" id="N">
+            <input type="button" value="PREVIOUS" id="P">
         </div>
     </div>
-    <script src="canvas.js"></script>
+    <script type="module" src="canvas.js"></script>
 </body>
 </html>
