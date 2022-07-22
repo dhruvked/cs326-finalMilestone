@@ -33,7 +33,7 @@ app.post('/saveLine',async(req,res)=>{
 })
 
 // TODO #5: Implement the /highestWordScores endpoint
-app.get('/highestWordScores',async(req,res)=>{
+app.get('/topLines',async(req,res)=>{
   try{
     res.json(await database.top10lines());
     res.statusCode=200;
