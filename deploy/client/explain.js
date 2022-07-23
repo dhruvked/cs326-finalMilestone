@@ -5,7 +5,7 @@ export class Explain{
         this.slide_number=1;
     }
 
-    displayText(){
+    displayText(grid){
         let ctx=this.canvas.getContext("2d");
         ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
         if(this.slide_number>7 || this.slide_number<1){

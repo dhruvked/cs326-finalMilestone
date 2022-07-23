@@ -42,12 +42,12 @@ function revfetchY(e){
 
 function next(){
     explain.slide_number++;
-    explain.displayText()
+    explain.displayText(grid)
 }
 
 function  prev(){
     explain.slide_number--;
-    explain.displayText()
+    explain.displayText(grid)
 }
 
 async function storeLine(){
@@ -55,6 +55,12 @@ async function storeLine(){
     let b=grid.line.b
     await board.saveLine(m,b);
     await board.render(document.getElementById("Points"))
+}
+
+async function deleteLines(){
+    await board.deleteLine();
+    await board.render(document.getElementById("Points"))
+
 }
 document.getElementById("slopeRange").addEventListener('input',fetchSlope);
 document.getElementById("yRange").addEventListener('input',fetchY);
@@ -70,3 +76,5 @@ document.getElementById("slopeRange").addEventListener('mouseup',storeLine);
 document.getElementById("yRange").addEventListener('mouseup',storeLine)
 document.getElementById("testerS").addEventListener('keyup',storeLine);
 document.getElementById("testerY").addEventListener('keyup',storeLine);
+
+document.getElementById('del').addEventListener('click',deleteLines)
