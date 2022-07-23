@@ -31,21 +31,11 @@ class Database {
     const res = await this.client.query(queryText);
   }
 
-  // Close the pool.
   async close() {
     this.client.release();
     await this.pool.end();
   }
-  /**
-   * Saves a word score to the database.
-   *
-   * This method reads the database file as an object, adds the new score to the
-   * data, and then writes the data back to the database file.
-   *
-   * @param {string} name the name of the player
-   * @param {string} word the word played
-   * @param {number} score the score of the word
-   */
+
   async saveLine(slope, intercept) {
     const queryText =
       'INSERT INTO points (slope, intercept) VALUES ($1, $2) RETURNING *';
@@ -53,17 +43,30 @@ class Database {
     return res.rows;
   }
 
-  /**
-   * Returns the top 10 word scores.
-   *
-   * This method reads the database file as an object, sorts the word scores by
-   * word score, and returns the top 10.
-   *
-   * @returns [{name: string, word: string, score: number}] returns the top 10
-   * scores
-   */
   async last10Lines() {
     const queryText = 'select * from points order by slope limit 10';
+    const res = await this.client.query(queryText);
+    return res.rows;
+  }
+
+  async updateIntercept(slope,intercept){
+    const queryText =
+      'Update points set intercept=$2 where slope=$1 RETURNING *';
+    const res = await this.client.query(queryText, [slope, intercept]);
+    return res.rows;
+  }
+
+
+  async updateSlope(slope,intercept){
+    const queryText =
+      'Update points set intercept=$1 where slope=$2 RETURNING *';
+    const res = await this.client.query(queryText, [slope, intercept]);
+    return res.rows;
+  }
+
+
+  async deleteLines(){
+    const queryText = 'delete from points';
     const res = await this.client.query(queryText);
     return res.rows;
   }
