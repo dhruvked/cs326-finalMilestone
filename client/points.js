@@ -1,32 +1,37 @@
 class LineBoard{
-    constructor(){
-        this.lines=[];
-    }
 
-    async saveLine(user,slope,intercept){
+    async saveLine(slope,intercept){
         try{
-            let newLine={user,slope,intercept};
             const responseJSON=await fetch('/saveLine',{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
                 },
-                body: JSON.stringify(newLine),
+                body: JSON.stringify({"slope":slope, "intercept":intercept}),
             })
-            this.lines.push(newLine)
         }
         catch(err){
             console.log(err)
         }
     }
 
-    render(element) {
+    async render(element) {
+        let responseJSON=await fetch('/topLines',{
+            method:'GET',
+        })
+        let response=await responseJSON.json()
+        console.log(response)
         let html = '<h1>Last Lines</h1>';
         html += '<table>';
-        this.lines.forEach((line) => {
+        html += `
+            <tr>
+                <th>Slope</th>
+                <th>Intercept</th>
+            </tr>
+        `;
+        response.forEach((line) => {
           html += `
             <tr>
-              <td>${line.user}</td>
               <td>${line.slope}</td>
               <td>${line.intercept}</td>
             </tr>

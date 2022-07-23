@@ -68,7 +68,7 @@ export class Grid{
             document.getElementById("testerS").value = this.line.m.toFixed(2);
             document.getElementById("testerY").value = this.line.b.toFixed(2);
 
-            await board.saveLine(0,this.line.m.toFixed(2),this.line.b.toFixed(2));
+            await board.saveLine(this.line.m.toFixed(2),this.line.b.toFixed(2));
             board.render(document.getElementById("Points"))
         }
         this.lastClick = [this.line.x, this.line.y];

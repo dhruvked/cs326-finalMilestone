@@ -6,8 +6,8 @@ let canvas=document.getElementById("canvas1");
 let grid=new Grid(canvas);
 grid.makeGrid();
 grid.makeLine();
-grid.canvas.addEventListener("click",(e)=>{grid.event=e;grid.clickLine();});
-
+grid.canvas.addEventListener("click",(e)=>{grid.event=e;grid.clickLine(board);});
+await board.render(document.getElementById("Points"));
 let canvas2=document.getElementById("canvas2");
 let explain=new Explain(canvas2);
 explain.displayText();
@@ -50,10 +50,11 @@ function  prev(){
     explain.displayText()
 }
 
-function storeLine(){
+async function storeLine(){
     let m=grid.line.m
     let b=grid.line.b
-    board.saveLine(0,m,b);
+    await board.saveLine(m,b);
+    await board.render(document.getElementById("Points"))
 }
 document.getElementById("slopeRange").addEventListener('input',fetchSlope);
 document.getElementById("yRange").addEventListener('input',fetchY);

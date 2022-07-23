@@ -52,7 +52,7 @@ export class Grid{
         ctx.stroke();
     }
 
-    clickLine(){
+    async clickLine(board){
         let e=this.event;
         this.line.x = e.x - this.start().x;
         this.line.x=(this.line.x - 250) / 25;
@@ -67,6 +67,9 @@ export class Grid{
             this.clicks = 0;
             document.getElementById("testerS").value = this.line.m.toFixed(2);
             document.getElementById("testerY").value = this.line.b.toFixed(2);
+
+            await board.saveLine(this.line.m.toFixed(2),this.line.b.toFixed(2));
+            board.render(document.getElementById("Points"))
         }
         this.lastClick = [this.line.x, this.line.y];
     };

@@ -24,7 +24,6 @@ class Database {
   async init() {
     const queryText = `
       create table if not exists points(
-        userID int,
         slope float,
         intercept float
       );
@@ -47,10 +46,10 @@ class Database {
    * @param {string} word the word played
    * @param {number} score the score of the word
    */
-  async saveLine(user, slope, intercept) {
+  async saveLine(slope, intercept) {
     const queryText =
-      'INSERT INTO points (userID, slope, intercept) VALUES ($1, $2, $3) RETURNING *';
-    const res = await this.client.query(queryText, [user, slope, intercept]);
+      'INSERT INTO points (slope, intercept) VALUES ($1, $2) RETURNING *';
+    const res = await this.client.query(queryText, [slope, intercept]);
     return res.rows;
   }
 
@@ -64,7 +63,7 @@ class Database {
    * scores
    */
   async last10Lines() {
-    const queryText = 'SELECT * FROM points limit 10';
+    const queryText = 'select * from points order by slope limit 10';
     const res = await this.client.query(queryText);
     return res.rows;
   }

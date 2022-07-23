@@ -19,8 +19,7 @@ app.use('/', express.static('client'));
 // TODO #4: Implement the /wordScore endpoint
 app.post('/saveLine',async(req,res)=>{
   try{
-    console.log(req)
-    await database.saveLine(req.body['user'],req.body['slope'],req.body['score'])
+    await database.saveLine(req.body['slope'],req.body['intercept'])
     res.statusCode=200;
     res.ok=true;
     res.send({status:'success'})
@@ -34,7 +33,7 @@ app.post('/saveLine',async(req,res)=>{
 // TODO #5: Implement the /highestWordScores endpoint
 app.get('/topLines',async(req,res)=>{
   try{
-    res.json(await database.top10lines());
+    res.json(await database.last10Lines());
     res.statusCode=200;
     res.ok=true;
     res.end();
