@@ -78,3 +78,25 @@ document.getElementById("testerS").addEventListener('keyup',storeLine);
 document.getElementById("testerY").addEventListener('keyup',storeLine);
 
 document.getElementById('del').addEventListener('click',deleteLines)
+
+let table=document.getElementsByTagName('table').item(0);
+var rows = table.getElementsByTagName('tr');
+let slope='';
+let intercept='';
+for ( var i = 1; i < rows.length; i++) {
+
+    rows[i].i = i;
+    rows[i].onclick = function() {
+
+        slope = table.rows[this.i].cells[0].innerHTML;                
+        intercept = table.rows[this.i].cells[1].innerHTML;
+        grid.line.m=parseFloat(slope);
+        grid.line.b=parseFloat(intercept);
+        grid.makeLine();
+
+        document.getElementById("testerS").value = grid.line.m;
+        document.getElementById("testerY").value = grid.line.b;
+        document.getElementById("slopeRange").value = grid.line.m;
+        document.getElementById("yRange").value = grid.line.b;
+    };
+}
