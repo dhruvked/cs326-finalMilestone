@@ -43,6 +43,43 @@ app.get('/topLines',async(req,res)=>{
   }
 })
 
+app.put('/newSlope',async (req, res) => {
+  try {
+    await database.updateSlope(req.body['slope'],req.body['intercept'])
+    res.statusCode=200;
+    res.ok=true;
+    res.send({status:'success'})
+    res.end();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+
+app.put('/newIntercept',async (req, res) => {
+  try {
+    await database.updateIntercept(req.body['slope'],req.body['intercept'])
+    res.statusCode=200;
+    res.ok=true;
+    res.send({status:'success'})
+    res.end();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.delete('/resetLines',async (req, res) => {
+  try {
+    await database.deleteLines()
+    res.statusCode=200;
+    res.ok=true;
+    res.send({status:'success'})
+    res.end();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 // EVERYTHING BELOW THIS WILL WORK AFTER YOU IMPLEMENT THE ABOVE
 
 // This matches all routes that are not defined.
